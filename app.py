@@ -54,6 +54,24 @@ def selecting():
     SELECT * FROM Basketball;
     ''')
     records = cur.fetchall()
+    response_string="<table>"
+    for player in records:
+        response_string+="<tr>"
+        for info in player:
+            response_string+="<td>{}</td>.format(info)"
+        response_string+="</tr>"
+    response_string+=
+    response_string+="</table>"
+    conn.close()
+    return response_string
+
+@app.route('/db_drop')
+def dropping(): 
+    conn = psycopg2.connect("postgres://skuser:4X6aRfFuNCvi5dux1wCYTeFR2u5NFOQm@dpg-cj3u2sdiuie55pnqiub0-a/skflask")
+    cur = conn.cursor()
+    cur.execute('''
+    DROP TABLE Basketball;
+    ''')
     conn.commit()
     conn.close()
-    return 'Basketball table created successfully!'
+    return 'Basketball table successfully dropped!'
