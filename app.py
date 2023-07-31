@@ -14,7 +14,7 @@ def testing():
     return 'Database connection successful!'
 
 @app.route('/db_create')
-def testing(): 
+def creating(): 
     conn = psycopg2.connect("postgres://skuser:4X6aRfFuNCvi5dux1wCYTeFR2u5NFOQm@dpg-cj3u2sdiuie55pnqiub0-a/skflask")
     cur = conn.cursor()
     cur.execute('''
@@ -29,3 +29,19 @@ def testing():
     conn.commit()
     conn.close()
     return 'Basketball table created successfully!'
+
+@app.route('/db_insert')
+def inserting(): 
+    conn = psycopg2.connect("postgres://skuser:4X6aRfFuNCvi5dux1wCYTeFR2u5NFOQm@dpg-cj3u2sdiuie55pnqiub0-a/skflask")
+    cur = conn.cursor()
+    cur.execute('''
+    INSERT INTO Basketball (First, Last, City, Name, Number)
+    Values
+    ('Jayson', 'Tatum', 'Boston', 'Celtics', 0),
+    ('Stephen', 'Curry', 'San Francisco', 'Warriors', 30),
+    ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
+    ('Kawhi', 'Leonard', 'Los Angeles', 'Clippers', 2);
+    ''')
+    conn.commit()
+    conn.close()
+    return 'Basketball rows inserted successfully!'
