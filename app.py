@@ -62,8 +62,8 @@ def selecting():
         response_string+="</tr>"
     response_string+="</table>"
     conn.close()
-    console.log(records)
-    return response_string
+    return(records)
+    # return response_string
 
 @app.route('/db_drop')
 def dropping(): 
